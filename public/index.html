@@ -1,0 +1,178 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="vendor/diagram-js.css">
+    <link rel="stylesheet" href="./diagram-style.css">
+
+    <!-- UIkit CSS -->
+    <!--
+    <link rel="stylesheet" href="./uikit-3.7.3/css/uikit.min.css" />
+    <link rel="stylesheet" href="./custom-uikit/css/uikit.css" />
+    -->
+    
+    
+    <link rel="stylesheet" href="https://getuikit.com/css/theme.css?1473"/>
+
+    <!-- UIkit JS -->
+    <!--
+    <script src="./uikit-3.7.3/js/uikit.min.js"></script>
+    <script src="./uikit-3.7.3/js/uikit-icons.min.js"></script>
+    -->
+    
+    <script src="./custom-uikit/js/uikit.js"></script>
+    <script src="./custom-uikit/js/uikit-icons.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css" />-->
+
+    <script src="./modal-diagram-selection.js"></script>
+
+    <style>
+      .no-border {
+        border-left-width: 0px;
+        border-top-width: 0px;      
+        border-right-width: 0px;
+      }
+    </style>
+
+
+  </head>
+  <body>
+    <script src="vendor/editor.js"></script>
+    
+    <nav class="uk-navbar-container " uk-navbar>
+      <div class="uk-navbar-left">
+  
+          <a class="uk-navbar-item uk-logo" href="#">
+            <img src="logo-com-nome-mais-claro-lateral.png" alt="logo" style="width:120px;height:40px;">
+          </a>
+
+          <div class="uk-navbar-item uk-height-1-1">
+            <div class="uk-divider-vertical" style="height: 70%;"></div>
+          </div>
+
+          <div class="uk-navbar-item ">
+            <ul class="uk-breadcrumb "> <!--uk-flex uk-flex-bottom-->
+              <!--<li><a href="">Empresa ABC</a></li>-->
+              <!--<li><a href="">Setor X</a></li>-->
+              <li><span id="diagram-breadcrumb-name">Default Diagram</span></li>
+            </ul>
+          </div>
+      </div>
+
+      <div class="uk-navbar-right">
+        <div class="uk-navbar-item ">
+          <button class="uk-button uk-button-primary" id="new-diagram-buttom">New</button>
+        </div>
+
+        <div class="uk-navbar-item uk-height-1-1">
+          <div class="uk-divider-vertical" style="height: 70%;"></div>
+        </div>
+
+        <div class="uk-navbar-item ">
+          <!-- onclick="UIkit.notification({message: 'Success message...', status: 'success'})" -->
+          <!--<button class="uk-button uk-button-primary" onclick="saver.save(canvas)">Save</button>-->
+          
+          <button class="uk-button uk-button-primary" onclick="updateDiagram(saver, canvas)">Save</button>
+          <button class="uk-button uk-button-default" onclick="loadModal()">Load</button>
+        </div>
+        
+      </div>
+    </nav>
+
+    
+    <div id="modal-manage-diagrams" uk-modal>
+      <div class="uk-modal-dialog uk-modal-body">
+          <h2 class="uk-modal-title">Select one diagram</h2>
+
+          <div id="modal-manage-diagrams-button-container">
+
+          </div>
+
+          <!--
+          <p class="uk-text-right">
+              <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+              <button class="uk-button uk-button-primary" type="button">Save</button>
+          </p>
+          -->
+      </div>
+    </div>
+
+    <div id="offcanvas-reveal" uk-offcanvas="flip: true; overlay: true">
+      <div class="uk-offcanvas-bar">
+  
+          <button class="uk-offcanvas-close" type="button" uk-close></button>
+
+          <ul id="menu-accordion" uk-accordion="multiple: true">
+            <li class="uk-open">
+                <a class="uk-accordion-title" href="#acordion">Service</a>
+                <div class="uk-accordion-content">
+                  <div class="uk-margin-small">
+                    <label class="uk-form-label uk-text-bold" for="menu-component-name">Name</label>
+                    <div class="uk-form-controls">
+                      <div class="uk-inline uk-width-1-1">
+                        <span class="uk-form-icon uk-form-icon-flip" uk-icon="pencil"></span>
+                        <input id="menu-component-name"  class="uk-input uk-form-small uk-form-blank" type="text" placeholder="Enter a name" name="uname" value="Name">
+                      </div>
+                    </div>
+                  </div>
+        
+                  <div class="uk-margin-small">
+                    <label class="uk-form-label uk-text-bold" for="menu-component-id">ID</label>
+                    <div class="uk-form-controls">
+                      <div class="uk-inline uk-width-1-1">
+                        <span class="uk-form-icon uk-form-icon-flip" uk-icon="pencil"></span>
+                        <input id="menu-component-id"  class="uk-input uk-form-small uk-form-blank" type="text" placeholder="Enter an ID" name="uname" value="Component Id">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </li>
+            <li>
+                <a class="uk-accordion-title" href="#acordion">Properties</a>
+                <div class="uk-accordion-content">
+                  <div id="properties-list">
+                    
+                  </div>
+                </div>
+            </li>
+        </ul>
+
+
+      </div>
+    </div>
+
+    <div>
+      <div id="container"></div>
+    </div>
+
+    <script src="index.js"></script>
+    <script>
+      // https://github.com/uikit/uikit/issues/2513
+      jQuery('#menu-accordion').on('hidden', (event) => {
+          event.stopPropagation();
+      });
+    </script>
+
+    <script>
+      UIkit.util.on('#new-diagram-buttom', 'click', function (e) {
+        e.preventDefault();
+        e.target.blur();
+        UIkit.modal.prompt('Diagram name:' /*, Math.floor(Math.random() * 8999) + 1000*/ ).then(async function (name) {
+          if(name != undefined && name != '') {
+            var id = await saver.create(name, canvas);
+
+            if(id) {
+              UIkit.notification({message: 'Successfully saved', status: 'success', pos: 'bottom-left'});
+              updateDiagramBreadCrumbName(name, id);
+            } else {
+              UIkit.notification({message: 'Error saving diagram', status: 'danger', pos: 'bottom-left'});
+            } 
+          } else {
+            UIkit.notification({message: 'Invalid diagram name', status: 'danger', pos: 'bottom-left'});
+          }
+        })
+      });
+    </script>
+  </body>
+</html>
