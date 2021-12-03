@@ -176,8 +176,8 @@ RemoteServerSaver.prototype.load = async function(diagramId, diagram, canvas, el
   const createdShapes = {};
 
   for (const element of diagramModel.elements) {
-    delete element.data.labels;
-    delete element.data.children;
+    if(element && element.data && element.data.labels) delete element.data.labels;
+    if(element && element.data && element.data.children) delete element.data.children;
 
     element.data.id = adaptId(element.data.id);
 
@@ -201,6 +201,8 @@ RemoteServerSaver.prototype.load = async function(diagramId, diagram, canvas, el
   function adaptId(id) {
     return 'loaded_' + id;
   }
+
+  return diagramModel;
 }
 
 RemoteServerSaver.prototype.getDiagramIds = async function getDiagramIds() {

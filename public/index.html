@@ -39,7 +39,7 @@
   </head>
   <body>
     <script src="vendor/editor.js"></script>
-    
+
     <nav class="uk-navbar-container " uk-navbar>
       <div class="uk-navbar-left">
   
@@ -62,7 +62,8 @@
 
       <div class="uk-navbar-right">
         <div class="uk-navbar-item ">
-          <button class="uk-button uk-button-primary" id="new-diagram-buttom">New</button>
+          <button class="uk-button uk-button-primary" onclick="updateDiagram(saver, canvas)">Save</button>
+          <button class="uk-button uk-button-default" onclick="window.location.reload()">Reload</button>
         </div>
 
         <div class="uk-navbar-item uk-height-1-1">
@@ -73,7 +74,7 @@
           <!-- onclick="UIkit.notification({message: 'Success message...', status: 'success'})" -->
           <!--<button class="uk-button uk-button-primary" onclick="saver.save(canvas)">Save</button>-->
           
-          <button class="uk-button uk-button-primary" onclick="updateDiagram(saver, canvas)">Save</button>
+          <button class="uk-button uk-button-primary" id="new-diagram-buttom">New</button>
           <button class="uk-button uk-button-default" onclick="loadModal()">Load</button>
         </div>
         
