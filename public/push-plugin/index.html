@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.9.4/dist/css/uikit.min.css" />
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.9.4/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.9.4/dist/js/uikit-icons.min.js"></script>
+
+    <script src="./index.js"></script>
+  </head>
+
+  <body class="">
+
+    <!-- preloader -->
+    <div id="preloader" class="uk-overlay-primary uk-position-cover" hidden=true>
+      <div class="uk-position-center">
+          <span uk-spinner="ratio: 2"></span>
+      </div>
+    </div>
+
+    <form class="uk-container-xsmall uk-section uk-section-muted uk-align-center uk-padding-large">
+      <fieldset class="uk-fieldset">
+
+          <legend class="uk-legend">Simulador</legend>
+
+          
+
+          <div class="uk-margin">
+              <select id="select-diagram" class="uk-select" onchange="updateSelectService(this)">
+              </select>
+          </div>
+
+          <div class="uk-margin">
+            <select id="select-service" class="uk-select">
+                
+            </select>
+          </div>
+
+          <div class="uk-margin">
+            <input class="uk-input" id="name" type="text" placeholder="Nome da propriedade" required>
+          </div>
+
+          <div class="uk-margin">
+            <input class="uk-input" id="value" type="text" placeholder="Valor da propriedade" required>
+          </div>
+
+          
+      </fieldset>
+    </form>
+
+    <button class="uk-button uk-button-primary uk-align-center" onclick="send()">Save</button>
+  </body>
+
+  <script>
+    updateSelectDiagram();
+  </script>
+</html>
