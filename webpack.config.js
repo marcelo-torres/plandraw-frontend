@@ -20,5 +20,13 @@ module.exports = {
     new Dotenv(),
   ],
   mode: 'development',
-  devtool: 'source-map'
+  devtool: 'source-map',
+  devServer: {
+    port: 80,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+      "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+    }
+  }
 };
