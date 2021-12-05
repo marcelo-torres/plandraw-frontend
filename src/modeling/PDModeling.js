@@ -66,3 +66,16 @@ PDModeling.prototype.connect = function(source, target, attrs, hints) {
   var parentIndex = 0; // connections must be rendered behind other elements
   return this.createConnection(source, target, parentIndex, attrs || {}, source.parent, hints);
 };
+
+
+PDModeling.prototype.createConnection = function(source, target, parentIndex, connection, parent, hints) {
+  var connection = BaseModeling.prototype.createConnection.call(this, source, target, parentIndex, connection, parent, hints);
+  connection._type = "Connection";
+  return connection;
+}
+
+PDModeling.prototype.createShape = function(shape, position, target, parentIndex, hints) {
+  var shape = BaseModeling.prototype.createShape.call(this, shape, position, target, parentIndex, hints);
+  shape._type = "Shape";
+  return shape;
+}

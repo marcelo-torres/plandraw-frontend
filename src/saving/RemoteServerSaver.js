@@ -91,8 +91,11 @@ RemoteServerSaver.prototype.create = async function(diagramName, canvas) {
   
     for (const element of diagramElements) {
   
+      console.log(element);
+
+
       var elementToSave = {
-        type: element.constructor.name,
+        type: element._type ? element._type : element.constructor.name,
         data: element
       }
   
@@ -135,7 +138,7 @@ RemoteServerSaver.prototype.update = async function(diagramName, diagramId, canv
     for (const element of diagramElements) {
   
       var elementToSave = {
-        type: element.constructor.name,
+        type: element._type ? element._type : element.constructor.name,
         data: element
       }
   
