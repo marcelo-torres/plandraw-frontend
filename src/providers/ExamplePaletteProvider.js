@@ -26,6 +26,10 @@ ExamplePaletteProvider.prototype.getPaletteEntries = function() {
       elementFactory = this._elementFactory,
       lassoTool = this._lassoTool;
 
+  function getRandomId() {
+    return `${Math.floor(Math.random() * 9999999) + 1}`;
+  }
+
   return {
     'lasso-tool': {
       group: 'tools',
@@ -79,24 +83,8 @@ ExamplePaletteProvider.prototype.getPaletteEntries = function() {
             businessObject: {
               type: 'service',
               name: 'sem nome',
-              id: '',
-              properties: [
-                {
-                  writable: false,
-                  name: 'Owner',
-                  value: ''
-                },
-                {
-                  writable: false,
-                  name: 'Float',
-                  value: ''
-                },
-                {
-                  writable: true,
-                  name: 'Flok',
-                  value: ''
-                }
-              ]
+              id: getRandomId(),
+              properties: []
             }
           });
 
@@ -111,12 +99,12 @@ ExamplePaletteProvider.prototype.getPaletteEntries = function() {
       action: {
         click: function() {
           var shape = elementFactory.createShape({
-            width: 150,
+            width: 200,
             height: 80,
             businessObject: {
               type: 'service',
               name: '',
-              id: '',
+              id: getRandomId(),
               properties: []
             }
           });
