@@ -98,6 +98,9 @@ RemoteServerSaver.prototype.create = async function(diagramName, canvas) {
         type: type,
         data: element
       }
+      if(element.businessObject) {
+        elementToSave.data.businessObject = element.businessObject;
+      }
   
       if (type == 'Connection') {
           elementToSave['connectionData'] = {
@@ -135,12 +138,16 @@ RemoteServerSaver.prototype.update = async function(diagramName, diagramId, canv
       elements: new Array()
     };
   
-    var type = element._type ? element._type : element.constructor.name;
+    
     for (const element of diagramElements) {
   
+      var type = element._type ? element._type : element.constructor.name;
       var elementToSave = {
         type: type,
         data: element
+      }
+      if(element.businessObject) {
+        elementToSave.data.businessObject = element.businessObject;
       }
   
       if (type == 'Connection') {
