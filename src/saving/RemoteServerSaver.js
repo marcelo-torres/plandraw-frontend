@@ -5,7 +5,8 @@ export default function RemoteServerSaver() {
   this.KEY = "myItem";
   this.JSONfn = {};
 
-  this.HOST = 'http://localhost:8081/';
+  this.HOST = process.env.BFF_BASE_PATH;
+  console.log(this.HOST);
   this.BASE_PATH = 'api/v1/plandraw/';
   this.URL_DIAGRAM = this.HOST + this.BASE_PATH + 'diagram/';
 

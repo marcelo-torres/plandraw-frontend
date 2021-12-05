@@ -1,4 +1,5 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   entry: {
@@ -14,7 +15,9 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin([
       { from: '**/*', to: 'vendor', context: 'node_modules/diagram-js/assets' }
-    ])
+    ]),
+
+    new Dotenv(),
   ],
   mode: 'development',
   devtool: 'source-map'
