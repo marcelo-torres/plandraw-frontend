@@ -1,5 +1,32 @@
 /* global Editor */
 
+async function countAccess() {
+      
+  var currentdate = new Date(); 
+  var datetime = currentdate.getDate() + "/"
+                  + (currentdate.getMonth()+1)  + "/" 
+                  + currentdate.getFullYear() + " @ "  
+                  + currentdate.getHours() + ":"  
+                  + currentdate.getMinutes() + ":" 
+                  + currentdate.getSeconds();
+
+  var access = {
+    lastTime: datetime,
+  }
+
+  const options = {
+      headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(access)
+  }
+
+  const base_url = 'http://localhost:8081/';
+  return fetch(base_url + `api/v1/plandraw/site/access-count/access-site-count-plandraw`, options)
+}
+countAccess();
 
 // (1) create new editor instance
 
