@@ -65,7 +65,7 @@ MenuLoader.prototype.openMenu = function (element) {
             var propertyName = property.name;
             var inputId = 'input-'+property.name;
             var inputValue = property.value;
-            var labelId = 'input-'+property.name;
+            var labelId = 'input-label-'+property.name;
             var labelValue = property.name;
 
             if(property.writable)
@@ -170,9 +170,10 @@ MenuLoader.prototype.saveData = function(element) {
 
             var inputId = 'input-'+property.name;
             var input = document.getElementById(inputId);      
-            property.value = input.innerText;
+            property.value = input.value;
+            console.log(input.value);
 
-            console.log(input, input.innerText);
+            console.log(input, input.value);
         }
     }
 }
