@@ -149,6 +149,8 @@ MenuLoader.prototype.openMenu = function (element) {
 MenuLoader.prototype.saveData = function(element) {
     if(!element || !element.businessObject) return;
 
+    console.log("saving menu data to element: ", element);
+
     saveMainFields(element, this);
     saveVariableFields(element, this);
 
@@ -168,7 +170,9 @@ MenuLoader.prototype.saveData = function(element) {
 
             var inputId = 'input-'+property.name;
             var input = document.getElementById(inputId);      
-            property.value = input.value;
+            property.value = input.innerText;
+
+            console.log(input, input.innerText);
         }
     }
 }
